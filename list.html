@@ -1,0 +1,61 @@
+<head>
+    <title>Hello Vue To Do List</title>
+    <!-- Include Vue.js library -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+        
+<div id ="app">
+<!--    Vue will manage all the HTML here.  -->
+
+    <h1>Task List</h1>  <!-- Heading for to-do list--> 
+
+    <h2>Enter new task</h2>  <!-- Subheading for entering new task -->
+    <label>Please enter your to-do task</label>  <!-- label for input field -->
+    <input v-model="newTask">
+    <br>
+    <button v-on:click="addTask">Add Task</button>
+
+    <h2>Task List</h2>  <!-- Subheading for the task list --> 
+    <ul>
+<!-- create list item for each task in the taskList -->
+        <li v-for="task in taskList">
+            {{ task }}  
+        </li>
+    </ul>
+
+</div>
+
+
+<script>
+
+    const { createApp, ref } = Vue  // set up Vue app
+
+    // create Vue app
+    createApp({
+        setup() {
+
+            const taskList = ref([ 'Water plants', 'Pay cellphone bills', 'Wash floor'])
+            const newTask = ref('')
+            
+            function addTask() {
+                // add the newTask to the taskList if not empty
+                if (newTask.value) {
+                    taskList.value.push(newTask.value)
+                    newTask.value = ''  // empty input field upon new task being added
+                }
+            }
+
+            return {
+                taskList,
+                newTask,
+                addTask        
+            }
+
+        }
+    }).mount('#app')  // mount the Vue app to the div with id "app"
+
+</script>
+
+</body>

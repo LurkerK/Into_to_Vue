@@ -1,0 +1,27 @@
+2. Property "total" was accessed during render but is not defined on instance.
+
+What does this Vue warning message mean? 
+    You are trying to use the variable "total" when it has yet to be defined.
+
+
+Can you safely ignore it? 
+    The warning should not be ignored. 
+        - the "total" will not display in the webpage.
+        - debugging will be more of a hastle.
+
+
+What causes it? 
+    At least 1 of 3 things is true regarding the "total" property:
+        - it has yet to be defined in the "setup" section.
+        - it hasn't been included in the "return" section.
+        - there is a typo in the code pertaining to it.
+
+
+How do you fix it? 
+    I would first focus my attention on the computed properties.
+    At least in the case of the "cart.html" created in the videos,
+    The return statement is directly under the section in which
+    the reactive properties are defined. I would check that the
+    "total" property is defined and returned. Should the error
+    persist, I would then look to the table and make check that
+    the code for the total being outputted is correct. 

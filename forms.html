@@ -1,0 +1,50 @@
+<head>
+    <title>Hello Vue Forms</title>
+    <!-- Include Vue.js library -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+
+<div id ="app">
+<!--    Vue will manage all the HTML here.  -->
+
+<label>Please enter your name:</label>
+    <input v-model="name">  <!-- Input field for name -->
+
+    <!-- Display message if name is provided -->
+    <p v-if="name">Thanks, your name is {{ name }}</p>
+    <p v-else>Awaiting user input</p>
+
+
+    <button v-on:click="clearName">Clear Name</button>
+
+</div>
+
+
+<script>
+
+    const { createApp, ref } = Vue  // set up Vue app
+
+    // create Vue app
+    createApp({
+        setup() {
+
+            const name = ref('')  // empty string
+
+            // revert name to empty string
+            function clearName() {
+                name.value = ''  
+            }
+
+            return {
+                name,
+                clearName
+            }
+        }
+
+    }).mount('#app')  // mount the Vue app to the div with id "app"
+
+</script>
+
+</body>

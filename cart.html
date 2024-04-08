@@ -1,0 +1,67 @@
+<head>
+    <title>Hello Vue Forms</title>
+    <!-- Include Vue.js library -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+
+<div id ="app">
+<!--    Vue will manage all the HTML here.  -->
+
+    <!-- Table; highlighted columns, each representing detail of item -->
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>total</th>
+        </tr>
+    
+        <!-- Table generating rows for each item.
+        Displaying name, price, quantity and total price(considering quantity of item) -->
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ unitPrice }}</td>
+            <td><input type="number" v-model="quantity"></td> <!-- Input field for quantity -->
+            <td>{{ total }}</td>
+        </tr>
+    </table>
+
+
+</div>
+
+
+<script>
+
+    const { createApp, ref, computed } = Vue  // set up Vue app
+
+    // create Vue app
+    createApp({
+        setup() {
+            // define reactive properties for item details
+            const name = ref('Hat')  // starting item name 
+            const quantity = ref(1)  // starting quantity
+            const unitPrice = ref(4.99)  // starting price (when quantity = 1)
+
+            // compute total price based on quantity and unit price
+            const total = computed( function () {
+                const totalPrice = quantity.value * unitPrice.value
+                const formattedPrice = totalPrice.toFixed(2)
+                return formattedPrice
+            })
+
+
+            return {
+                name,
+                quantity,
+                unitPrice,
+                total
+            }
+        }
+
+    }).mount('#app')  // mount the Vue app to the div with id "app"
+
+</script>
+
+</body>
